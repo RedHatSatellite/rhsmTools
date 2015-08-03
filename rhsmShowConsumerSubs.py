@@ -20,6 +20,7 @@ import getpass
 import urllib2
 import base64
 import sys
+import ssl
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -39,6 +40,8 @@ else:
 
 if not password: password = getpass.getpass("%s's password:" % login)
 
+if hasattr(ssl, '_create_unverified_context'):
+	        ssl._create_default_https_context = ssl._create_unverified_context
 
 portal_host = "subscription.rhn.redhat.com"
 
