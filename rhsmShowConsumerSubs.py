@@ -86,10 +86,11 @@ consumerdata = json.load(result)
 
 #### Now that we have a list of Consumers, loop through them and 
 #### List the subscriptions associated with them. 
-print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin"
+print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username"
 for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
+	username = consumer["username"]
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
 	try:
 		sysinfo = urllib2.Request(detailedurl)
@@ -106,7 +107,7 @@ for consumer in consumerdata:
 		startDate = products["startDate"]
 		endDate = products["endDate"]
 		quantity = products["pool"]["consumed"]
-		print "%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin)
+		print "%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username)
 
 
 sys.exit(2)
