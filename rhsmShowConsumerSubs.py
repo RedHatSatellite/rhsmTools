@@ -106,8 +106,8 @@ for consumer in consumerdata:
 		contractNumber = products["pool"]["contractNumber"]
 		startDate = products["startDate"]
 		endDate = products["endDate"]
-		quantity = products["pool"]["consumed"]
+		quantity = products["quantity"]
 		print "%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username)
 
 
-sys.exit(2)
+sys.exit(0)
