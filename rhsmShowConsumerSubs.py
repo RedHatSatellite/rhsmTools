@@ -101,7 +101,11 @@ for consumer in consumerdata:
 	except Exception, e:
 		print "FATAL Error - %s" % (e)
 		sys.exit(1)
-	ipaddr = sysdata['facts']['network.ipv4_address']
+	if sysdata['facts'].has_key('network.ipv4_address'):
+		ipaddr = sysdata['facts']['network.ipv4_address']
+	else:
+		ipaddr = "Unknown"
+
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
 	#print detailedurl
 	try:
