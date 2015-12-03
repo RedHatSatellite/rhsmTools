@@ -86,12 +86,28 @@ consumerdata = json.load(result)
 
 #### Now that we have a list of Consumers, loop through them and 
 #### List the subscriptions associated with them. 
-print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username"
+print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,IP Address"
 for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
 	username = consumer["username"]
+	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
+	try:
+		sysinfo = urllib2.Request(factsurl)
+		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
+		sysinfo.add_header("Authorization", "Basic %s" % base64string)
+		sysresult = urllib2.urlopen(sysinfo)
+		sysdata = json.load(sysresult)
+	except Exception, e:
+		print "FATAL Error - %s" % (e)
+		sys.exit(1)
+	if sysdata['facts'].has_key('network.ipv4_address'):
+		ipaddr = sysdata['facts']['network.ipv4_address']
+	else:
+		ipaddr = "Unknown"
+
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
+	#print detailedurl
 	try:
 		sysinfo = urllib2.Request(detailedurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
@@ -106,8 +122,8 @@ for consumer in consumerdata:
 		contractNumber = products["pool"]["contractNumber"]
 		startDate = products["startDate"]
 		endDate = products["endDate"]
-		quantity = products["pool"]["consumed"]
-		print "%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username)
+		quantity = products["quantity"]
+		print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,ipaddr)
 
 
-sys.exit(2)
+sys.exit(0)
