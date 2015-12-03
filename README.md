@@ -18,7 +18,10 @@ with that.
 $./rhsmShowConsumerSubs.py -l rh_user_account
 ~~~
 
-Note: the script will prompt for password if not provided
+# Notes
+
+* The script will prompt for password if not provided
+* The **https_proxy** environmental variable, if set, will be used to connect via a proxy
 
 ### Example Output
 
