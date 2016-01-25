@@ -24,7 +24,7 @@ import ssl
 from optparse import OptionParser
 
 parser = OptionParser()
-parser.add_option("-l", "--login", dest="login", help="Login user for SAM", metavar="LOGIN")
+parser.add_option("-l", "--login", dest="login", help="Login user for RHSM", metavar="LOGIN")
 parser.add_option("-p", "--password", dest="password", help="Password for specified user. Will prompt if omitted", metavar="PASSWORD")
 (options, args) = parser.parse_args()
 
@@ -86,12 +86,13 @@ consumerdata = json.load(result)
 
 #### Now that we have a list of Consumers, loop through them and 
 #### List the subscriptions associated with them. 
-print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,IP Address"
+print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress"
 for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
 	username = consumer["username"]
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
+	#print "Attempting to connect: " + factsurl
 	try:
 		sysinfo = urllib2.Request(factsurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
@@ -105,6 +106,14 @@ for consumer in consumerdata:
 		ipaddr = sysdata['facts']['network.ipv4_address']
 	else:
 		ipaddr = "Unknown"
+	if sysdata['facts'].has_key('cpu.cpu(s)'):
+		cpus = sysdata['facts']['cpu.cpu(s)']
+	else:
+		cpus = "Unknown"
+	if sysdata['facts'].has_key('cpu.cpu_socket(s)'):
+		sockets = sysdata['facts']['cpu.cpu_socket(s)']
+	else:
+		sockets = "Unknown"
 
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
 	#print detailedurl
@@ -123,7 +132,7 @@ for consumer in consumerdata:
 		startDate = products["startDate"]
 		endDate = products["endDate"]
 		quantity = products["quantity"]
-		print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,ipaddr)
+		print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
 
 
 sys.exit(0)
