@@ -9,7 +9,7 @@ Satellite-6,satellite,11223344,"Red Hat Satellite Capsule Server",2015-10-08T04:
 Satellite-6,satellite,11223344,"Smart Management (Unlimited guests)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,20,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
 Satellite-6,satellite,11223344,"Load Balancer",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
 Satellite-6,satellite,11223344,"Extended Update Support",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,"Red Hat Enterprise Virtualization (2-sockets)", Premium,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Virtualization (2-sockets), Premium",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
 Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Premium (1-2 sockets) (Unlimited guests)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
 Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server Entry Level, Self-support",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
 Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
