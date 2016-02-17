@@ -21,7 +21,7 @@ Satellite-6,satellite,11223344,"Resilient Storage",2015-10-08T04:00:00.000+0000,
 Satellite-6,satellite,11223344,"Red Hat Enterprise Virtualization (2-sockets), Standard",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
 sat.example.com,system,11223344,"Red Hat Satellite 6 (For Transition Only)",2016-02-13T05:00:00.000+0000,2017-02-13T04:59:59.000+0000,1,2016-02-16T16:29:05.000+0000,redhatuser,2,2,192.168.126.5
 satellite.example.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-17T09:57:32.000+0000,redhatuser,1,4,172.17.0.4
-devnode-141.auroracloud.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-14T18:44:30.000+0000,redhatuser,1,1,172.17.3.141
+dev-141.example.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-14T18:44:30.000+0000,redhatuser,1,1,172.17.3.141
 satellite6.example.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.5
 system1.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.19
 system2.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.20
