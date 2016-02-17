@@ -1,32 +1,32 @@
 Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress
-SAM,satellite,11223344,Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2016-02-17T08:59:12.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,15,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux for Virtual Datacenters, Premium,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Scalable File System,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,15,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux for Virtual Datacenters, Standard,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Satellite Capsule Server,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,1,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Smart Management (Unlimited guests),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,20,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Load Balancer,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Extended Update Support,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Virtualization (2-sockets), Premium,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux Server, Premium (1-2 sockets) (Unlimited guests),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux Server Entry Level, Self-support,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes),2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Satellite,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,1,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Software Collections and Developer Toolset,2015-06-19T04:00:00.000+0000,2016-06-19T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,High Availability,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Resilient Storage,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-Satellite-6,satellite,11223344,Red Hat Enterprise Virtualization (2-sockets), Standard,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
-sat.example.com,system,11223344,Red Hat Satellite 6 (For Transition Only),2016-02-13T05:00:00.000+0000,2017-02-13T04:59:59.000+0000,1,2016-02-16T16:29:05.000+0000,redhatuser,2,2,192.168.126.5
-satellite.example.com,system,11223344,Red Hat Satellite,2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-17T09:57:32.000+0000,redhatuser,1,4,172.17.0.4
-devnode-141.auroracloud.com,system,11223344,Red Hat Satellite,2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-14T18:44:30.000+0000,redhatuser,1,1,172.17.3.141
-satellite6.example.com,system,11223344,Red Hat Satellite,2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.5
-system1.example.com,system,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.19
-system2.example.com,system,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.20
-system3.example.com,system,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.21
-system4.example.com,system,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.22
-system5.example.com,system,11223344,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.23
+SAM,satellite,11223344,"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2016-02-17T08:59:12.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,15,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux for Virtual Datacenters, Premium",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Scalable File System",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,15,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux for Virtual Datacenters, Standard",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Satellite Capsule Server",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,1,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Smart Management (Unlimited guests)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,20,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Load Balancer",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Extended Update Support",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Virtualization (2-sockets)", Premium,2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Premium (1-2 sockets) (Unlimited guests)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server Entry Level, Self-support",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Linux Server, Standard (Physical or Virtual Nodes)",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Satellite",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,1,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Software Collections and Developer Toolset",2015-06-19T04:00:00.000+0000,2016-06-19T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"High Availability",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Resilient Storage",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,5,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+Satellite-6,satellite,11223344,"Red Hat Enterprise Virtualization (2-sockets), Standard",2015-10-08T04:00:00.000+0000,2016-10-08T03:59:59.000+0000,10,2015-12-18T15:18:39.000+0000,redhatuser,Unknown,Unknown,Unknown
+sat.example.com,system,11223344,"Red Hat Satellite 6 (For Transition Only)",2016-02-13T05:00:00.000+0000,2017-02-13T04:59:59.000+0000,1,2016-02-16T16:29:05.000+0000,redhatuser,2,2,192.168.126.5
+satellite.example.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-17T09:57:32.000+0000,redhatuser,1,4,172.17.0.4
+devnode-141.auroracloud.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-14T18:44:30.000+0000,redhatuser,1,1,172.17.3.141
+satellite6.example.com,system,11223344,"Red Hat Satellite",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.5
+system1.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.19
+system2.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.20
+system3.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.21
+system4.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.22
+system5.example.com,system,11223344,"Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes)",2016-02-11T05:00:00.000+0000,2017-02-11T04:59:59.000+0000,1,2016-02-13T14:39:48.000+0000,redhatuser,1,4,172.17.0.23
 
 
