@@ -26,6 +26,7 @@ from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-l", "--login", dest="login", help="Login user for RHSM", metavar="LOGIN")
 parser.add_option("-p", "--password", dest="password", help="Password for specified user. Will prompt if omitted", metavar="PASSWORD")
+parser.add_option("-d", help="print more details for debugging", dest='debug', default=False, action='store_true')
 (options, args) = parser.parse_args()
 
 if not ( options.login ):
@@ -38,7 +39,7 @@ else:
 	password = options.password
 
 
-if not password: password = getpass.getpass("%s's password:" % login)
+
 
 if hasattr(ssl, '_create_unverified_context'):
 	        ssl._create_default_https_context = ssl._create_unverified_context
@@ -92,7 +93,8 @@ for consumer in consumerdata:
 	lastCheckin = consumer["lastCheckin"]
 	username = consumer["username"]
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
-	#print "Attempting to connect: " + factsurl
+        if options.debug :
+           print "Attempting to connect: " + factsurl
 	try:
 		sysinfo = urllib2.Request(factsurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
@@ -116,7 +118,8 @@ for consumer in consumerdata:
 		sockets = "Unknown"
 
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
-	#print detailedurl
+	if options.debug :
+           print detailedurl
 	try:
 		sysinfo = urllib2.Request(detailedurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
