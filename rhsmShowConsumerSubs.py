@@ -26,7 +26,7 @@ from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-l", "--login", dest="login", help="Login user for RHSM", metavar="LOGIN")
 parser.add_option("-p", "--password", dest="password", help="Password for specified user. Will prompt if omitted", metavar="PASSWORD")
-parser.add_option("-d", help="print more details for debugging", dest='debug', default=False, action='store_true')
+parser.add_option("-d", "--debug", dest='debug',help="print more details for debugging" , default=False, action='store_true')
 (options, args) = parser.parse_args()
 
 if not ( options.login ):
@@ -39,7 +39,7 @@ else:
 	password = options.password
 
 
-
+if not password: password = getpass.getpass("%s's password:" % login)
 
 if hasattr(ssl, '_create_unverified_context'):
 	        ssl._create_default_https_context = ssl._create_unverified_context
@@ -50,7 +50,8 @@ portal_host = "subscription.rhn.redhat.com"
 url = "https://" + portal_host + "/subscription/users/" + login + "/owners/"
 try:
  	request = urllib2.Request(url)
-	print "Attempting to connect: " + url
+        if options.debug :
+            print "Attempting to connect: " + url
 	base64string = base64.encodestring('%s:%s' % (login, password)).strip()
 	request.add_header("Authorization", "Basic %s" % base64string)
 	result = urllib2.urlopen(request)
@@ -68,7 +69,8 @@ for accounts in accountdata:
 
 #### Grab a list of Consumers
 url = "https://" + portal_host + "/subscription/owners/" + acct + "/consumers/"
-print "Attempting to connect: " + url
+if options.debug :
+     print "Attempting to connect: " + url
 
 try:
  	request = urllib2.Request(url)
@@ -94,7 +96,7 @@ for consumer in consumerdata:
 	username = consumer["username"]
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
         if options.debug :
-           print "Attempting to connect: " + factsurl
+            print "Attempting to connect: " + factsurl
 	try:
 		sysinfo = urllib2.Request(factsurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
@@ -118,8 +120,7 @@ for consumer in consumerdata:
 		sockets = "Unknown"
 
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
-	if options.debug :
-           print detailedurl
+	#print detailedurl
 	try:
 		sysinfo = urllib2.Request(detailedurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
