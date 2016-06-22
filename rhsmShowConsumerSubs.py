@@ -89,7 +89,7 @@ consumerdata = json.load(result)
 
 #### Now that we have a list of Consumers, loop through them and 
 #### List the subscriptions associated with them. 
-print "Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress"
+print "Name, UUID, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress"
 for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
@@ -136,7 +136,7 @@ for consumer in consumerdata:
 		startDate = products["startDate"]
 		endDate = products["endDate"]
 		quantity = products["quantity"]
-		print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+		print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
 
 
 sys.exit(0)
