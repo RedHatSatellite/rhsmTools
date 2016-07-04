@@ -67,7 +67,7 @@ except urllib2.URLError, e:
 	print "Error: cannot connect to the API: %s" % (e)
 	print "Check your URL & try to login using the same user/pass via the WebUI and check the error!"
 	sys.exit(1)
-except:
+except Exception, e:
 	print "FATAL Error - %s" % (e)
 	sys.exit(2)
 
@@ -86,7 +86,7 @@ except urllib2.URLError, e:
 	print "Error: cannot connect to the API: %s" % (e)
 	print "Check your URL & try to login using the same user/pass via the WebUI and check the error!"
 	sys.exit(1)
-except:
+except Exception, e:
 	print "FATAL Error - %s" % (e)
 	sys.exit(2)
 
@@ -97,6 +97,9 @@ consumerdata = json.load(result)
 for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
+	if lastCheckin is not None:
+		dt = parse_date(lastCheckin)
+		dt_no_tzinfo = dt.replace(tzinfo=None)
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
 	try:
 		sysinfo = urllib2.Request(factsurl)
@@ -122,11 +125,12 @@ for consumer in consumerdata:
 	except Exception, e:
 		print "FATAL Error - %s" % (e)
 		sys.exit(1)
+
 	for products in sysdata:
-		dt = parse_date(lastCheckin)
-		dt_no_tzinfo = dt.replace(tzinfo=None)
-		if dt_no_tzinfo <= dt_reference:
-			print "Hostname: %s IP:%s UUID:%s last checked-in %s which is older than %s" % (consumer["name"],ipaddr,consumer["uuid"],dt_no_tzinfo.strftime("%Y-%m-%d"),dt_reference.strftime("%Y-%m-%d"))
+		if lastCheckin is not None and dt_no_tzinfo <= dt_reference:
+			print "Hostname: %s IP:%s UUID:%s last checked-in %s which is older than %s" % (consumer["name"],
+				ipaddr, consumer["uuid"], dt_no_tzinfo.strftime("%Y-%m-%d"), 
+				dt_reference.strftime("%Y-%m-%d"))
 			choice = None
 			if not options.force: 
 				choice = raw_input("Unregister? y/n ").lower()
@@ -140,7 +144,4 @@ for consumer in consumerdata:
 					result = urllib2.urlopen(request)
 				except Exception, e:
 					print "FATAL Error - %s" % (e)
-			
-			else:
-				pass
 sys.exit(0)
