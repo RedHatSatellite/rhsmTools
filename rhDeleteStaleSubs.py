@@ -45,7 +45,8 @@ else:
     force = options.force
 
 try:
-    dt_reference = datetime.strptime(checkin, '%Y-%m-%d')
+    date_reference = datetime.strptime(checkin, '%Y-%m-%d')
+    date_reference = date_reference.strftime("%Y-%m-%d")
 except ValueError:
     print "Incorrect Date format. Please use %Y-%m-%d. Example usage: ./rhDeleteStaleSubs.py -l rh_user_account -c 2016-02-10"
     sys.exit(1)
@@ -98,17 +99,17 @@ print "[DEBUG] Checking %i subscribed systems..." %(len(consumerdata))
 # Now that we have a list of Consumers, loop through them and 
 # verify the LastCheckin date associated with them. 
 for consumer in consumerdata:
-	print "[DEBUG] Checking Hostname %s UUID %s" %(consumer["name"], consumer["uuid"])
+	#print "[DEBUG] Checking Hostname %s UUID %s" %(consumer["name"], consumer["uuid"])
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
 	if lastCheckin is not None:
-		dt = parse_date(lastCheckin)
-		dt_no_tzinfo = dt.replace(tzinfo=None)
-		if dt_no_tzinfo <= dt_reference:
+		date = parse_date(lastCheckin)
+		lastCheckin_date = date.replace(tzinfo=None)
+		lastCheckin_date = lastCheckin_date.strftime("%Y-%m-%d")
+		if lastCheckin_date <= date_reference:
 			print "Hostname: %s UUID:%s last checked-in %s which is older than %s" % (consumer["name"],
-				consumer["uuid"], dt_no_tzinfo.strftime("%Y-%m-%d"), 
-				dt_reference.strftime("%Y-%m-%d"))
+				consumer["uuid"], lastCheckin_date, date_reference)
 			choice = None
 			if not options.force: 
 				choice = raw_input("Unregister? y/n ").lower()
