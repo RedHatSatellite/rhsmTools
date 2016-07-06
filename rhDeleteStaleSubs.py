@@ -97,44 +97,18 @@ consumerdata = json.load(result)
 for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
+	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
 	if lastCheckin is not None:
 		dt = parse_date(lastCheckin)
 		dt_no_tzinfo = dt.replace(tzinfo=None)
-	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
-	try:
-		sysinfo = urllib2.Request(factsurl)
-		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
-		sysinfo.add_header("Authorization", "Basic %s" % base64string)
-		sysresult = urllib2.urlopen(sysinfo)
-		sysdata = json.load(sysresult)
-	except Exception, e:
-		print "FATAL Error - %s" % (e)
-		sys.exit(1)
-	if sysdata['facts'].has_key('network.ipv4_address'):
-		ipaddr = sysdata['facts']['network.ipv4_address']
-	else:
-		ipaddr = "Unknown"
-
-	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
-	try:
-		sysinfo = urllib2.Request(detailedurl)
-		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
-		sysinfo.add_header("Authorization", "Basic %s" % base64string)
-		sysresult = urllib2.urlopen(sysinfo)
-		sysdata = json.load(sysresult)
-	except Exception, e:
-		print "FATAL Error - %s" % (e)
-		sys.exit(1)
-
-	for products in sysdata:
-		if lastCheckin is not None and dt_no_tzinfo <= dt_reference:
-			print "Hostname: %s IP:%s UUID:%s last checked-in %s which is older than %s" % (consumer["name"],
-				ipaddr, consumer["uuid"], dt_no_tzinfo.strftime("%Y-%m-%d"), 
+		if dt_no_tzinfo <= dt_reference:
+			print "Hostname: %s UUID:%s last checked-in %s which is older than %s" % (consumer["name"],
+				consumer["uuid"], dt_no_tzinfo.strftime("%Y-%m-%d"), 
 				dt_reference.strftime("%Y-%m-%d"))
 			choice = None
 			if not options.force: 
 				choice = raw_input("Unregister? y/n ").lower()
-			if choice in ['yes','y', 'YES', 'Y'] or options.force:
+			if choice in ['yes','y'] or options.force:
 				print "Removing System's Subscription from RHSM..."
 				try:
 					request = urllib2.Request(factsurl)
