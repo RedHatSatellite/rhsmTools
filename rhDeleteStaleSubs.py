@@ -30,6 +30,7 @@ parser = OptionParser()
 parser.add_option("-l", "--login", dest="login", help="Login user for RHSM", metavar="LOGIN")
 parser.add_option("-p", "--password", dest="password", help="Password for specified user. Will prompt if omitted", metavar="PASSWORD")
 parser.add_option("-c", "--last-checkin", dest="checkin", help="Last Date a System checked in with RHSM, format yyyy-mm-dd", metavar="CHECK-IN")
+parser.add_option("-t", "--filter", dest="filter", help="Pattern to filter hostnames against, for example: -f 'ip-10-234' will match systems containing that pattern in their hostname field.", metavar="FILTER")
 parser.add_option("-f", "--force", dest="force", help="Do not ask prompt for confirmation, unregister all systems that match the last-checkin criteria", default=False, action='store_true')
 (options, args) = parser.parse_args()
 
@@ -43,6 +44,7 @@ else:
     password = options.password
     checkin = options.checkin
     force = options.force
+    filter = options.filter
 
 try:
     date_reference = datetime.strptime(checkin, '%Y-%m-%d')
@@ -51,6 +53,8 @@ except ValueError:
     print "Incorrect Date format. Please use %Y-%m-%d. Example usage: ./rhDeleteStaleSubs.py -l rh_user_account -c 2016-02-10"
     sys.exit(1)
 
+if filter is None:
+	filter = ''
 if not password: password = getpass.getpass("%s's password:" % login)
 
 if hasattr(ssl, '_create_unverified_context'):
@@ -103,7 +107,7 @@ for consumer in consumerdata:
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
-	if lastCheckin is not None:
+	if lastCheckin is not None and filter in consumer["name"] :
 		date = parse_date(lastCheckin)
 		lastCheckin_date = date.replace(tzinfo=None)
 		lastCheckin_date = lastCheckin_date.strftime("%Y-%m-%d")
