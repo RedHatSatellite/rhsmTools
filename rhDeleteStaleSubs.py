@@ -71,11 +71,13 @@ except Exception, e:
 	print "FATAL Error - %s" % (e)
 	sys.exit(2)
 
+print "[DEBUG] Authentication successful"
 accountdata = json.load(result)
 for accounts in accountdata:
 	acct = accounts["key"]
 
-#### Grab a list of Consumers
+# Grab a list of Consumers
+print "[DEBUG] Grabbing a list of systems"
 url = "https://" + portal_host + "/subscription/owners/" + acct + "/consumers/"
 try:
  	request = urllib2.Request(url)
@@ -91,10 +93,12 @@ except Exception, e:
 	sys.exit(2)
 
 consumerdata = json.load(result)
+print "[DEBUG] Checking %i subscribed systems..." %(len(consumerdata))
 
-#### Now that we have a list of Consumers, loop through them and 
-#### verify the LastCheckin date associated with them. 
+# Now that we have a list of Consumers, loop through them and 
+# verify the LastCheckin date associated with them. 
 for consumer in consumerdata:
+	print "[DEBUG] Checking Hostname %s UUID %s" %(consumer["name"], consumer["uuid"])
 	consumerType = consumer["type"]["label"]
 	lastCheckin = consumer["lastCheckin"]
 	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"

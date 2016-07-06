@@ -15,7 +15,8 @@ with that.
 # Usage
 
 ~~~
-$./rhsmShowConsumerSubs.py -l rh_user_account
+$python rhsmShowConsumerSubs.py -l rh_user_account
+$python rhDeleteStaleSubs.py -lrh_user-account --last-checkin 2016-07-05
 ~~~
 
 # Notes
