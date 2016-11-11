@@ -30,15 +30,15 @@ parser.add_option("-d", "--debug", dest='debug',help="print more details for deb
 parser.add_option("--host", dest='portal_host',help="RHSM host to use (Default subscription.rhn.redhat.com)" , default="subscription.rhn.redhat.com")
 (options, args) = parser.parse_args()
 
-if not ( options.login ):
-	print "Must specify a login (will prompt for password if omitted).  See usage:"
-	parser.print_help()
-	print "\nExample usage: ./rhsmShowConsumerSubs.py -l rh_user_account "
-	sys.exit(1)
+if not (options.login):
+    print "Must specify a login (will prompt for password if omitted).  See usage:"
+    parser.print_help()
+    print "\nExample usage: ./rhsmShowConsumerSubs.py -l rh_user_account "
+    sys.exit(1)
 else:
-	login = options.login
-	password = options.password
-	portal_host = options.portal_host
+    login = options.login
+    password = options.password
+    portal_host = options.portal_host
 
 
 if not password: password = getpass.getpass("%s's password:" % login)
@@ -51,41 +51,41 @@ if hasattr(ssl, '_create_unverified_context'):
 #### Grab the Candlepin account number
 url = "https://" + portal_host + "/subscription/users/" + login + "/owners/"
 try:
- 	request = urllib2.Request(url)
-        if options.debug :
-            print "Attempting to connect: " + url
-	base64string = base64.encodestring('%s:%s' % (login, password)).strip()
-	request.add_header("Authorization", "Basic %s" % base64string)
-	result = urllib2.urlopen(request)
+    request = urllib2.Request(url)
+    if options.debug :
+        print "Attempting to connect: " + url
+    base64string = base64.encodestring('%s:%s' % (login, password)).strip()
+    request.add_header("Authorization", "Basic %s" % base64string)
+    result = urllib2.urlopen(request)
 except urllib2.URLError, e:
-	print "Error: cannot connect to the API: %s" % (e)
-	print "Check your URL & try to login using the same user/pass via the WebUI and check the error!"
-	sys.exit(1)
+    print "Error: cannot connect to the API: %s" % (e)
+    print "Check your URL & try to login using the same user/pass via the WebUI and check the error!"
+    sys.exit(1)
 except:
-	print "FATAL Error - %s" % (e)
-	sys.exit(2)
+    print "FATAL Error - %s" % (e)
+    sys.exit(2)
 
 accountdata = json.load(result)
 for accounts in accountdata:
-	acct = accounts["key"]
+    acct = accounts["key"]
 
 #### Grab a list of Consumers
 url = "https://" + portal_host + "/subscription/owners/" + acct + "/consumers/"
 if options.debug :
-     print "Attempting to connect: " + url
+    print "Attempting to connect: " + url
 
 try:
- 	request = urllib2.Request(url)
-	base64string = base64.encodestring('%s:%s' % (login, password)).strip()
-	request.add_header("Authorization", "Basic %s" % base64string)
-	result = urllib2.urlopen(request)
+    request = urllib2.Request(url)
+    base64string = base64.encodestring('%s:%s' % (login, password)).strip()
+    request.add_header("Authorization", "Basic %s" % base64string)
+    result = urllib2.urlopen(request)
 except urllib2.URLError, e:
-	print "Error: cannot connect to the API: %s" % (e)
-	print "Check your URL & try to login using the same user/pass via the WebUI and check the error!"
-	sys.exit(1)
+    print "Error: cannot connect to the API: %s" % (e)
+    print "Check your URL & try to login using the same user/pass via the WebUI and check the error!"
+    sys.exit(1)
 except:
-	print "FATAL Error - %s" % (e)
-	sys.exit(2)
+    print "FATAL Error - %s" % (e)
+    sys.exit(2)
 
 consumerdata = json.load(result)
 
@@ -93,56 +93,55 @@ consumerdata = json.load(result)
 #### List the subscriptions associated with them. 
 print "Name, UUID, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress"
 for consumer in consumerdata:
-	consumerType = consumer["type"]["label"]
-	lastCheckin = consumer["lastCheckin"]
-	username = consumer["username"]
-	factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
-        if options.debug :
-            print "Attempting to connect: " + factsurl
-	try:
-		sysinfo = urllib2.Request(factsurl)
-		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
-		sysinfo.add_header("Authorization", "Basic %s" % base64string)
-		sysresult = urllib2.urlopen(sysinfo)
-		sysdata = json.load(sysresult)
-	except Exception, e:
-		print "FATAL Error - %s" % (e)
-		sys.exit(1)
-	if sysdata['facts'].has_key('network.ipv4_address'):
-		ipaddr = sysdata['facts']['network.ipv4_address']
-	else:
-		ipaddr = "Unknown"
-	if sysdata['facts'].has_key('cpu.cpu(s)'):
-		cpus = sysdata['facts']['cpu.cpu(s)']
-	else:
-		cpus = "Unknown"
-	if sysdata['facts'].has_key('cpu.cpu_socket(s)'):
-		sockets = sysdata['facts']['cpu.cpu_socket(s)']
-	else:
-		sockets = "Unknown"
-
-	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
-        if options.debug:
-            print "Attempting to connect: " + url
-	try:
-		sysinfo = urllib2.Request(detailedurl)
-		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
-		sysinfo.add_header("Authorization", "Basic %s" % base64string)
-		sysresult = urllib2.urlopen(sysinfo)
-		sysdata = json.load(sysresult)
-	except Exception, e:
-		print "FATAL Error - %s" % (e)
-		sys.exit(1)
-	if sysdata:
-	    for products in sysdata:
-		productName = products["pool"]["productName"]
-		contractNumber = products["pool"]["contractNumber"]
-		startDate = products["startDate"]
-		endDate = products["endDate"]
-		quantity = products["quantity"]
-                print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
-        else:
-                print "%s,%s,%s,NA,NA,NA,NA,NA,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,lastCheckin,username,sockets,cpus,ipaddr)
-
+    consumerType = consumer["type"]["label"]
+    lastCheckin = consumer["lastCheckin"]
+    username = consumer["username"]
+    factsurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/"
+    if options.debug :
+        print "Attempting to connect: " + factsurl
+        
+    try:
+        sysinfo = urllib2.Request(factsurl)
+        base64string = base64.encodestring('%s:%s' % (login, password)).strip()
+        sysinfo.add_header("Authorization", "Basic %s" % base64string)
+        sysresult = urllib2.urlopen(sysinfo)
+        sysdata = json.load(sysresult)
+    except Exception, e:
+        print "FATAL Error - %s" % (e)
+        sys.exit(1)
+    if sysdata['facts'].has_key('network.ipv4_address'):
+        ipaddr = sysdata['facts']['network.ipv4_address']
+    else:
+        ipaddr = "Unknown"
+    if sysdata['facts'].has_key('cpu.cpu(s)'):
+        cpus = sysdata['facts']['cpu.cpu(s)']
+    else:
+        cpus = "Unknown"
+    if sysdata['facts'].has_key('cpu.cpu_socket(s)'):
+        sockets = sysdata['facts']['cpu.cpu_socket(s)']
+    else:
+        sockets = "Unknown"
+    detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
+    if options.debug:
+        print "Attempting to connect: " + url
+    try:
+        sysinfo = urllib2.Request(detailedurl)
+        base64string = base64.encodestring('%s:%s' % (login, password)).strip()
+        sysinfo.add_header("Authorization", "Basic %s" % base64string)
+        sysresult = urllib2.urlopen(sysinfo)
+        sysdata = json.load(sysresult)
+    except Exception, e:
+        print "FATAL Error - %s" % (e)
+        sys.exit(1)
+    if sysdata:
+        for products in sysdata:
+            productName = products["pool"]["productName"]
+            contractNumber = products["pool"]["contractNumber"]
+            startDate = products["startDate"]
+            endDate = products["endDate"]
+            quantity = products["quantity"]
+            print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+    else:
+        print "%s,%s,%s,NA,NA,NA,NA,NA,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,lastCheckin,username,sockets,cpus,ipaddr)
 
 sys.exit(0)
