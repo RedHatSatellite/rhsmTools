@@ -132,13 +132,16 @@ for consumer in consumerdata:
 	except Exception, e:
 		print "FATAL Error - %s" % (e)
 		sys.exit(1)
-	for products in sysdata:
+	if sysdata:
+	    for products in sysdata:
 		productName = products["pool"]["productName"]
 		contractNumber = products["pool"]["contractNumber"]
 		startDate = products["startDate"]
 		endDate = products["endDate"]
 		quantity = products["quantity"]
-		print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+                print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+        else:
+                print "%s,%s,%s,NA,NA,NA,NA,NA,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,lastCheckin,username,sockets,cpus,ipaddr)
 
 
 sys.exit(0)
