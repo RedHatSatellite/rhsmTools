@@ -122,7 +122,8 @@ for consumer in consumerdata:
 		sockets = "Unknown"
 
 	detailedurl = "https://" + portal_host + "/subscription" + consumer["href"] + "/entitlements/"
-	#print detailedurl
+        if options.debug:
+            print "Attempting to connect: " + url
 	try:
 		sysinfo = urllib2.Request(detailedurl)
 		base64string = base64.encodestring('%s:%s' % (login, password)).strip()
