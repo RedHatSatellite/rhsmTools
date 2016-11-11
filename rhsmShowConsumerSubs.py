@@ -21,12 +21,14 @@ import urllib2
 import base64
 import sys
 import ssl
+import csv
 from optparse import OptionParser
 
 parser = OptionParser()
 parser.add_option("-l", "--login", dest="login", help="Login user for RHSM", metavar="LOGIN")
 parser.add_option("-p", "--password", dest="password", help="Password for specified user. Will prompt if omitted", metavar="PASSWORD")
 parser.add_option("-d", "--debug", dest='debug',help="print more details for debugging" , default=False, action='store_true')
+parser.add_option("-o", "--output", dest='outputfile',help="output subscriptions to CSV in current directory" , default=False, action='store_true')
 parser.add_option("--host", dest='portal_host',help="RHSM host to use (Default subscription.rhn.redhat.com)" , default="subscription.rhn.redhat.com")
 (options, args) = parser.parse_args()
 
@@ -45,8 +47,6 @@ if not password: password = getpass.getpass("%s's password:" % login)
 
 if hasattr(ssl, '_create_unverified_context'):
 	        ssl._create_default_https_context = ssl._create_unverified_context
-
-#portal_host = "subscription.rhn.redhat.com"
 
 #### Grab the Candlepin account number
 url = "https://" + portal_host + "/subscription/users/" + login + "/owners/"
@@ -92,6 +92,10 @@ consumerdata = json.load(result)
 #### Now that we have a list of Consumers, loop through them and 
 #### List the subscriptions associated with them. 
 print "Name, UUID, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress"
+if options.outputfile:
+    csv_writer = csv.writer(open(login + "_inventory_report.csv","wb") , delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+    csv_writer.writerow(["Name", "UUID", "Consumer Type", "Contract Number", "Product Name", "Start Date", "End Date", "Quantity", "Last Checkin", "Username" ,"Sockets","CPUs","IPAddress"])
+
 for consumer in consumerdata:
     consumerType = consumer["type"]["label"]
     lastCheckin = consumer["lastCheckin"]
@@ -133,6 +137,11 @@ for consumer in consumerdata:
     except Exception, e:
         print "FATAL Error - %s" % (e)
         sys.exit(1)
+    productName = "NA"
+    contractNumber = "NA"
+    startDate = "NA"
+    endDate = "NA"
+    quantity = "NA"
     if sysdata:
         for products in sysdata:
             productName = products["pool"]["productName"]
@@ -141,7 +150,11 @@ for consumer in consumerdata:
             endDate = products["endDate"]
             quantity = products["quantity"]
             print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+            if options.outputfile:
+                csv_writer.writerow([consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr])
     else:
-        print "%s,%s,%s,NA,NA,NA,NA,NA,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,lastCheckin,username,sockets,cpus,ipaddr)
+        print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+        if options.outputfile:
+            csv_writer.writerow([consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr])
 
 sys.exit(0)
