@@ -91,10 +91,10 @@ consumerdata = json.load(result)
 
 #### Now that we have a list of Consumers, loop through them and 
 #### List the subscriptions associated with them. 
-print "Name, UUID, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress"
+print "Name, UUID, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username,Sockets,CPUs,IPAddress,Virtual"
 if options.outputfile:
     csv_writer = csv.writer(open(login + "_inventory_report.csv","wb") , delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
-    csv_writer.writerow(["Name", "UUID", "Consumer Type", "Contract Number", "Product Name", "Start Date", "End Date", "Quantity", "Last Checkin", "Username" ,"Sockets","CPUs","IPAddress"])
+    csv_writer.writerow(["Name", "UUID", "Consumer Type", "Contract Number", "Product Name", "Start Date", "End Date", "Quantity", "Last Checkin", "Username" ,"Sockets","CPUs","IPAddress","Virtual"])
 
 for consumer in consumerdata:
     consumerType = consumer["type"]["label"]
@@ -113,6 +113,10 @@ for consumer in consumerdata:
     except Exception, e:
         print "FATAL Error - %s" % (e)
         sys.exit(1)
+    if sysdata['facts'].has_key('virt.is_guest'):
+        virtis = sysdata['facts']['virt.is_guest']
+    else:
+        virtis = "Unknown"
     if sysdata['facts'].has_key('network.ipv4_address'):
         ipaddr = sysdata['facts']['network.ipv4_address']
     else:
@@ -149,12 +153,12 @@ for consumer in consumerdata:
             startDate = products["startDate"]
             endDate = products["endDate"]
             quantity = products["quantity"]
-            print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+            print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr,virtis)
             if options.outputfile:
-                csv_writer.writerow([consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr])
+                csv_writer.writerow([consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr,virtis])
     else:
-        print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr)
+        print "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" % (consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr,virtis)
         if options.outputfile:
-            csv_writer.writerow([consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr])
+            csv_writer.writerow([consumer["name"],consumer["uuid"],consumerType,contractNumber,productName,startDate,endDate,quantity,lastCheckin,username,sockets,cpus,ipaddr,virtis])
 
 sys.exit(0)
