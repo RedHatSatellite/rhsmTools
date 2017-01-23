@@ -32,8 +32,8 @@ parser.add_option("-d", "--debug", dest='debug', help="print more details for de
                   action='store_true')
 parser.add_option("-s", "--subscription-management-app", dest='sma',
                   help="Which Subscription Management Application to download manifests from", metavar="SMA")
-parser.add_option("--host", dest='portal_host', help="RHSM host to use (Default subscription.rhn.redhat.com)",
-                  default="subscription.rhn.redhat.com")
+parser.add_option("--host", dest='portal_host', help="RHSM host to use (Default subscription.rhsm.redhat.com)",
+                  default="subscription.rhsm.redhat.com")
 (options, args) = parser.parse_args()
 
 if not (options.login and options.sma):
@@ -106,10 +106,21 @@ for consumer in consumerdata:
     if consumerType in ['satellite', 'sam']:
         if sma == consumerName:
             url = "https://" + portal_host + "/subscription/consumers/" + uuid + "/export/"
+            certs_url = "https://" + portal_host + "/subscription/consumers/" + uuid + "/certificates?lazy_regen=false"
             if options.debug:
                 print "\tAttempting to connect: " + url
                 print "\tSubscription Management Application %s matches parameters. Exporting..." % sma
             try:
+                if options.debug:
+                  print "\tRegenerating entitlement certificates for %s" % sma
+                certs_request = urllib2.Request(certs_url)
+                base64string = base64.encodestring('%s:%s' % (login, password)).strip()
+                certs_request.add_header("Authorization", "Basic %s" % base64string)
+                certs_request.get_method = lambda: 'PUT' 
+                certs_result = urllib2.urlopen(certs_request)
+                #
+                if options.debug:
+                  print "\tExporting manifest for %s" % sma
                 request = urllib2.Request(url)
                 base64string = base64.encodestring('%s:%s' % (login, password)).strip()
                 request.add_header("Authorization", "Basic %s" % base64string)
