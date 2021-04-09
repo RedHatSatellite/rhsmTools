@@ -1,4 +1,4 @@
-# Red Hat Subscription Management (RHSM):%s/foo/bar/g Tools
+# Red Hat Subscription Management (RHSM) Tools
 
 This repository contains a number of tools useful for working with Red Hat Subscription Management
 
