@@ -60,7 +60,7 @@ if not password: password = getpass.getpass("%s's password:" % login)
 if hasattr(ssl, '_create_unverified_context'):
 	        ssl._create_default_https_context = ssl._create_unverified_context
 
-portal_host = "subscription.rhn.redhat.com"
+portal_host = "subscription.rhsm.redhat.com"
 
 url = "https://" + portal_host + "/subscription/users/" + login + "/owners/"
 try:

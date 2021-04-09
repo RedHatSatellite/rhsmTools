@@ -29,7 +29,7 @@ parser.add_option("-l", "--login", dest="login", help="Login user for RHSM", met
 parser.add_option("-p", "--password", dest="password", help="Password for specified user. Will prompt if omitted", metavar="PASSWORD")
 parser.add_option("-d", "--debug", dest='debug',help="print more details for debugging" , default=False, action='store_true')
 parser.add_option("-o", "--output", dest='outputfile',help="output subscriptions to CSV in current directory" , default=False, action='store_true')
-parser.add_option("--host", dest='portal_host',help="RHSM host to use (Default subscription.rhn.redhat.com)" , default="subscription.rhn.redhat.com")
+parser.add_option("--host", dest='portal_host',help="RHSM host to use (Default subscription.rhsm.redhat.com)" , default="subscription.rhsm.redhat.com")
 (options, args) = parser.parse_args()
 
 if not (options.login):
