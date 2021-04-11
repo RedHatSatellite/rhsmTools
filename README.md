@@ -30,8 +30,8 @@ $./rhsmShowConsumerSubs.py -l rh_user_account
 
 ~~~
 $./rhsmShowConsumerSubs.py -l rh_user_account
-Attempting to connect: https://subscription.rhn.redhat.com/subscription/users/rh_user_account/owners/
-Attempting to connect: https://subscription.rhn.redhat.com/subscription/owners/1234567/consumers/
+Attempting to connect: https://subscription.rhsm.redhat.com/subscription/users/rh_user_account/owners/
+Attempting to connect: https://subscription.rhsm.redhat.com/subscription/owners/1234567/consumers/
 Name, Consumer Type, Contract Number, Product Name, Start Date, End Date, Quantity, Last Checkin, Username
 My_Satellite_App,satellite,12345678,Red Hat Satellite Capsule Server,2014-10-08T04:00:00.000+0000,2015-10-08T03:59:59.000+0000,7,2015-08-02T10:42:24.000+0000,admin_user
 My_Satellite_App,satellite,12345678,Red Hat Enterprise Linux Server, Premium (Physical or Virtual Nodes),2014-10-08T04:00:00.000+0000,2015-10-08T03:59:59.000+0000,13,2015-08-02T10:42:24.000+0000,admin_user
@@ -109,9 +109,9 @@ $ ./rhsmDownloadManifest.py  -l rh_user_account -s Satellite_62
 ### Example Output
 ~~~
 $ ./rhsmDownloadManifest.py  -l rh_user_account -s Satellite_62
-Attempting to connect: https://subscription.rhn.redhat.com/subscription/users/rh_user_account/owners/
-Attempting to connect: https://subscription.rhn.redhat.com/subscription/owners/11223344/consumers/
-	Attempting to connect: https://subscription.rhn.redhat.com/subscription/consumers/4739ea31-ff26-4327-893e-551610345d6b/export/
+Attempting to connect: https://subscription.rhsm.redhat.com/subscription/users/rh_user_account/owners/
+Attempting to connect: https://subscription.rhsm.redhat.com/subscription/owners/11223344/consumers/
+	Attempting to connect: https://subscription.rhsm.redhat.com/subscription/consumers/4739ea31-ff26-4327-893e-551610345d6b/export/
 	Subscription Management Application Satellite_62 matches parameters. Exporting...
 	Writing Manifest to Satellite_62_2016-09-18_12:01:21.zip
 ~~~
